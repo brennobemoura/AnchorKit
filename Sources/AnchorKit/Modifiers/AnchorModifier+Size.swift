@@ -1,5 +1,5 @@
 //
-//  AnchorModifier+Methods.swift
+//  AnchorModifier+SizeAxis.swift
 //
 //
 //  Created by onnerb on 15/09/22.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-extension AnchorModifier {
+extension AnchorModifier where Axis == Size {
 
     @discardableResult
     public func equal(
-        to keyPath: KeyPath<Axis, AnchorPoint>,
         constant: CGFloat = .zero,
         multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
@@ -20,7 +19,7 @@ extension AnchorModifier {
             anchor: anchor,
             relatedBy: .equal,
             firstAttribute: axis[keyPath: self.keyPath],
-            secondAttribute: axis[keyPath: keyPath],
+            secondAttribute: nil,
             constant: constant,
             multiplier: multiplier,
             priority: priority
@@ -29,7 +28,6 @@ extension AnchorModifier {
 
     @discardableResult
     public func lessThanOrEqual(
-        to keyPath: KeyPath<Axis, AnchorPoint>,
         constant: CGFloat = .zero,
         multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
@@ -38,7 +36,7 @@ extension AnchorModifier {
             anchor: anchor,
             relatedBy: .lessThanOrEqual,
             firstAttribute: axis[keyPath: self.keyPath],
-            secondAttribute: axis[keyPath: keyPath],
+            secondAttribute: nil,
             constant: constant,
             multiplier: multiplier,
             priority: priority
@@ -47,7 +45,6 @@ extension AnchorModifier {
 
     @discardableResult
     public func greaterThanOrEqual(
-        to keyPath: KeyPath<Axis, AnchorPoint>,
         constant: CGFloat = .zero,
         multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
@@ -56,7 +53,7 @@ extension AnchorModifier {
             anchor: anchor,
             relatedBy: .greaterThanOrEqual,
             firstAttribute: axis[keyPath: self.keyPath],
-            secondAttribute: axis[keyPath: keyPath],
+            secondAttribute: nil,
             constant: constant,
             multiplier: multiplier,
             priority: priority

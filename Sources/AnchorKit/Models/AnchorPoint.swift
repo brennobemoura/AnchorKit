@@ -21,6 +21,8 @@ public enum AnchorPoint {
 
     case height
     case width
+
+    case edges
 }
 
 extension AnchorPoint {
@@ -47,6 +49,8 @@ extension AnchorPoint {
             return .height
         case .width:
             return .width
+        case .edges:
+            return .notAnAttribute
         }
     }
 }

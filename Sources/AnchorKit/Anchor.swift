@@ -12,12 +12,6 @@ public class Anchor {
     private let reference: AnchorObject?
     private var constraints: [NSLayoutConstraint]
 
-    func build(_ priority: UILayoutPriority, _ builder: (AnchorObject, AnchorObject?) -> NSLayoutConstraint) {
-        let constraint = builder(base, reference)
-        constraint.priority = priority
-        constraints.append(constraint)
-    }
-
     init(base: AnchorObject, reference: AnchorObject?) {
         self.base = base
         self.reference = reference
@@ -26,6 +20,26 @@ public class Anchor {
 
     deinit {
         NSLayoutConstraint.activate(constraints)
+    }
+}
+
+extension Anchor {
+
+    func build(
+        _ priority: UILayoutPriority,
+        _ builder: (AnchorObject, AnchorObject?) -> [NSLayoutConstraint]
+    ) {
+        for constraint in builder(base, reference) {
+            constraint.priority = priority
+            constraints.append(constraint)
+        }
+    }
+
+    func build(
+        _ priority: UILayoutPriority,
+        _ builder: (AnchorObject, AnchorObject?) -> NSLayoutConstraint
+    ) {
+        build(priority, { [builder($0, $1)] })
     }
 }
 
@@ -69,11 +83,18 @@ extension Anchor {
 
 extension Anchor {
 
-    public var height: AnchorModifier<SizeAxis> {
+    public var height: AnchorModifier<Size> {
         .init(self, \.height)
     }
 
-    public var width: AnchorModifier<SizeAxis> {
+    public var width: AnchorModifier<Size> {
         .init(self, \.width)
+    }
+}
+
+extension Anchor {
+
+    public var edges: AnchorModifier<Edges> {
+        .init(self, \.edges)
     }
 }

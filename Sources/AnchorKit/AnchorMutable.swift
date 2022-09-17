@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class AnchorMutable {
+public final class AnchorMutable<Axis: AnchorAxis> {
 
     private let anchor: Anchor
     private let relatedBy: NSLayoutConstraint.Relation
@@ -38,16 +38,33 @@ public final class AnchorMutable {
     }
 
     deinit {
-        anchor.build(priority) {
-            NSLayoutConstraint(
-                item: $0,
-                attribute: firstAttribute.attribute,
-                relatedBy: relatedBy,
-                toItem: $1,
-                attribute: secondAttribute?.attribute ?? .notAnAttribute,
-                multiplier: multiplier,
-                constant: constant
-            )
+        switch Axis.self {
+        case is Edges.Type:
+            anchor.build(priority) { item, toItem in
+                [.top, .bottom, .left, .right].map {
+                    NSLayoutConstraint(
+                        item: item,
+                        attribute: $0,
+                        relatedBy: relatedBy,
+                        toItem: toItem,
+                        attribute: $0,
+                        multiplier: multiplier,
+                        constant: constant
+                    )
+                }
+            }
+        default:
+            anchor.build(priority) {
+                NSLayoutConstraint(
+                    item: $0,
+                    attribute: firstAttribute.attribute,
+                    relatedBy: relatedBy,
+                    toItem: $1,
+                    attribute: secondAttribute?.attribute ?? .notAnAttribute,
+                    multiplier: multiplier,
+                    constant: constant
+                )
+            }
         }
     }
 }

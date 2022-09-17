@@ -13,7 +13,7 @@ public struct AnchorModifier<Axis: AnchorAxis> {
     let axis: Axis
     let keyPath: KeyPath<Axis, AnchorPoint>
 
-    init(
+    fileprivate init(
         anchor: Anchor,
         axis: Axis,
         keyPath: KeyPath<Axis, AnchorPoint>
@@ -22,24 +22,44 @@ public struct AnchorModifier<Axis: AnchorAxis> {
         self.axis = axis
         self.keyPath = keyPath
     }
+}
 
-    init(_ anchor: Anchor, _ keyPath: KeyPath<Axis, AnchorPoint>) where Axis == XAxis {
+extension AnchorModifier where Axis == XAxis {
+
+    init(_ anchor: Anchor, _ keyPath: KeyPath<Axis, AnchorPoint>) {
         self.init(
             anchor: anchor,
             axis: .init(),
             keyPath: keyPath
         )
     }
+}
 
-    init(_ anchor: Anchor, _ keyPath: KeyPath<Axis, AnchorPoint>) where Axis == YAxis {
+extension AnchorModifier where Axis == YAxis {
+
+    init(_ anchor: Anchor, _ keyPath: KeyPath<Axis, AnchorPoint>) {
         self.init(
             anchor: anchor,
             axis: .init(),
             keyPath: keyPath
         )
     }
+}
 
-    init(_ anchor: Anchor, _ keyPath: KeyPath<Axis, AnchorPoint>) where Axis == SizeAxis {
+extension AnchorModifier where Axis == Size {
+
+    init(_ anchor: Anchor, _ keyPath: KeyPath<Axis, AnchorPoint>) {
+        self.init(
+            anchor: anchor,
+            axis: .init(),
+            keyPath: keyPath
+        )
+    }
+}
+
+extension AnchorModifier where Axis == Edges {
+
+    init(_ anchor: Anchor, _ keyPath: KeyPath<Axis, AnchorPoint>) {
         self.init(
             anchor: anchor,
             axis: .init(),

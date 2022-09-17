@@ -10,11 +10,11 @@ import UIKit
 extension AnchorModifier where Axis == YAxis {
 
     @discardableResult
-    public func equalTo(
+    public func equal(
         constant: CGFloat = .zero,
-        multiplier: CGFloat = .zero,
+        multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
-    ) -> AnchorMutable {
+    ) -> AnchorMutable<Axis> {
         .init(
             anchor: anchor,
             relatedBy: .equal,
@@ -27,11 +27,11 @@ extension AnchorModifier where Axis == YAxis {
     }
 
     @discardableResult
-    public func lessThanOrEqualTo(
+    public func lessThanOrEqual(
         constant: CGFloat = .zero,
-        multiplier: CGFloat = .zero,
+        multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
-    ) -> AnchorMutable {
+    ) -> AnchorMutable<Axis> {
         .init(
             anchor: anchor,
             relatedBy: .lessThanOrEqual,
@@ -44,11 +44,11 @@ extension AnchorModifier where Axis == YAxis {
     }
 
     @discardableResult
-    public func greaterThanOrEqualTo(
+    public func greaterThanOrEqual(
         constant: CGFloat = .zero,
-        multiplier: CGFloat = .zero,
+        multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
-    ) -> AnchorMutable {
+    ) -> AnchorMutable<Axis> {
         .init(
             anchor: anchor,
             relatedBy: .greaterThanOrEqual,

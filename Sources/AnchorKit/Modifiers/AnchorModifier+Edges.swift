@@ -1,5 +1,5 @@
 //
-//  AnchorModifier+SizeAxis.swift
+//  AnchorModifier+Edges.swift
 //
 //
 //  Created by onnerb on 15/09/22.
@@ -7,19 +7,19 @@
 
 import UIKit
 
-extension AnchorModifier where Axis == SizeAxis {
+extension AnchorModifier where Axis == Edges {
 
     @discardableResult
-    public func equalTo(
+    public func equal(
         constant: CGFloat = .zero,
-        multiplier: CGFloat = .zero,
+        multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
-    ) -> AnchorMutable {
+    ) -> AnchorMutable<Axis> {
         .init(
             anchor: anchor,
             relatedBy: .equal,
             firstAttribute: axis[keyPath: self.keyPath],
-            secondAttribute: nil,
+            secondAttribute: axis[keyPath: self.keyPath],
             constant: constant,
             multiplier: multiplier,
             priority: priority
@@ -27,16 +27,16 @@ extension AnchorModifier where Axis == SizeAxis {
     }
 
     @discardableResult
-    public func lessThanOrEqualTo(
+    public func lessThanOrEqual(
         constant: CGFloat = .zero,
-        multiplier: CGFloat = .zero,
+        multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
-    ) -> AnchorMutable {
+    ) -> AnchorMutable<Axis> {
         .init(
             anchor: anchor,
             relatedBy: .lessThanOrEqual,
             firstAttribute: axis[keyPath: self.keyPath],
-            secondAttribute: nil,
+            secondAttribute: axis[keyPath: self.keyPath],
             constant: constant,
             multiplier: multiplier,
             priority: priority
@@ -44,16 +44,16 @@ extension AnchorModifier where Axis == SizeAxis {
     }
 
     @discardableResult
-    public func greaterThanOrEqualTo(
+    public func greaterThanOrEqual(
         constant: CGFloat = .zero,
-        multiplier: CGFloat = .zero,
+        multiplier: CGFloat = 1,
         priority: UILayoutPriority = .required
-    ) -> AnchorMutable {
+    ) -> AnchorMutable<Axis> {
         .init(
             anchor: anchor,
             relatedBy: .greaterThanOrEqual,
             firstAttribute: axis[keyPath: self.keyPath],
-            secondAttribute: nil,
+            secondAttribute: axis[keyPath: self.keyPath],
             constant: constant,
             multiplier: multiplier,
             priority: priority

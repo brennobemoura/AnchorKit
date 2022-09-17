@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SizeAxis: AnchorAxis {
+public struct Size: AnchorAxis {
 
     public var height: AnchorPoint {
         .height
